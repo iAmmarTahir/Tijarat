@@ -1,0 +1,161 @@
+﻿
+@{
+    ViewBag.Title = "Ads";
+}
+
+
+@model System.Data.SqlClient.SqlDataReader
+@{
+
+    System.Data.SqlClient.SqlDataReader Ads = Model;
+}
+<style>
+    #myMenu ul li a:hover {
+        color: orange;
+        transition: 0.03s all ease-in-out;
+    }
+
+    .register a i:hover {
+        color: orange;
+        transition: 0.03s all ease-in-out;
+    }
+
+
+    .logo-text {
+        font-size: 4em;
+        font-family: 'Ubuntu';
+        font-weight: bold;
+        letter-spacing: 15px;
+        float: left;
+        display: inline-block;
+        margin-top: 5px;
+        margin-left: 30px;
+    }
+
+        .logo-text a {
+            text-decoration: none;
+            color: orange;
+            opacity: 0.8;
+            transition: 0.03s all ease-in-out;
+        }
+
+            .logo-text a:hover {
+                opacity: 1;
+            }
+
+    .logo-text-sm {
+        color: slategrey;
+        font-size: 0.5em;
+        font-weight: lighter;
+        text-transform: uppercase;
+        letter-spacing: normal;
+    }
+
+    #myMenu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 40px;
+        z-index: 70;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        box-shadow: 0.25rem 0.125rem 7px lightgrey;
+        height: 80px;
+        background-color: white;
+    }
+
+        #myMenu ul li {
+            display: inline-block;
+            margin-left: 30px;
+            margin-top: 25px;
+            float: left;
+        }
+
+            #myMenu ul li a {
+                font-family: Roboto;
+                font-size: 2.3em;
+                text-decoration: none;
+                color: slategrey;
+            }
+
+    .order-main {
+        margin-top: 80px;
+    }
+
+    .img-sm {
+        height: 100px;
+        width: 120px;
+    }
+
+    .sm-margin {
+        margin-top: 40px;
+    }
+    .mk-bold {
+        font-weight: bolder;
+        font-size: 2em;
+    }
+</style>
+<div id="myMenu">
+    <p class="logo-text"><a href="/Home/Index">Tijarat<span class="logo-text-sm">.com</span></a></p>
+    <ul>
+        <li><a href="/Admin/Index">Dashboard</a></li>
+        <li><a href="/Admin/Orders">Orders</a></li>
+        <li><a href="/Admin/Ads" s>Ads</a></li>
+        <li><a href="/Admin/Products">Products</a></li>
+        <li><a href="/Admin/Categories">Category</a></li>
+    </ul>
+</div>
+
+<div class="order-main">
+    <div class="row">
+        <div class="col-md-2">
+            <h3 class="mk-bold" style="padding-left: 30px;">Image</h3>
+        </div>
+        <div class="col-md-2">
+            <h3 class="mk-bold">Admin</h3>
+        </div>
+        <div class="col-md-2">
+            <h3 class="mk-bold">Product</h3>
+        </div>
+        <div class="col-md-2">
+            <h3 class="mk-bold">Price</h3>
+        </div>
+        <div class="col-md-2">
+            <h3 class="mk-bold">Description</h3>
+        </div>
+        <div class="col-md-2">
+            <form action="../../Admin/NewAd" method="post">
+                <button type="submit" style="font-size: 1.3em; padding: 5px;" class="btn btn-primary">Create New Ad</button>
+            </form>
+        </div>
+    </div>
+    @while (Ads.Read())
+    {
+        <div class="row">
+            <div class="col-md-2">
+                <img style="padding-left: 10px;" class="img-sm" src="@Ads[7]" />
+            </div>
+            <div class="col-md-2">
+                <h3 class="sm-margin">@Ads[2]</h3>
+            </div>
+            <div class="col-md-2">
+                <h3 class="sm-margin">@Ads[4]</h3>
+            </div>
+            <div class="col-md-2">
+                <h3 class="sm-margin">@Ads[5]</h3>
+            </div>
+            <div class="col-md-2">
+                <h3 class="sm-margin">@Ads[6]</h3>
+            </div>
+            <div class="col-md-1">
+                <form action="../../Admin/DeleteAd" method="post">
+                    <input name="adID" value="@Ads[0]" style="display: none;" />
+                    <button type="submit" style="margin-top: 33px" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+        <hr/>
+    }
+</div>
+

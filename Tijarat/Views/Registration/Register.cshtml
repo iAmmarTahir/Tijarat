@@ -1,0 +1,204 @@
+﻿@{ 
+    ViewBag.Title = "Register";
+}
+
+<script src="~/Scripts/pol.js">
+
+</script>
+
+<style>
+    .wrap {
+        margin-top: 100px;
+    }
+
+    #myMenu ul li a:hover {
+        color: orange;
+        transition: 0.03s all ease-in-out;
+    }
+
+    .register a i:hover {
+        color: orange;
+        transition: 0.03s all ease-in-out;
+    }
+
+
+    .logo-text {
+        font-size: 4em;
+        font-family: 'Ubuntu';
+        font-weight: bold;
+        letter-spacing: 15px;
+        float: left;
+        display: inline-block;
+        margin-top: 5px;
+        margin-left: 30px;
+    }
+
+    .logo-text a {
+        text-decoration: none;
+        color: orange;
+        opacity: 0.8;
+        transition: 0.03s all ease-in-out;
+    }
+
+    .logo-text a:hover{
+        opacity: 1;
+    }
+
+    .logo-text-sm {
+        color: slategrey;
+        font-size: 0.5em;
+        font-weight: lighter;
+        text-transform: uppercase;
+        letter-spacing: normal;
+    }
+
+    #myMenu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 40px;
+        z-index: 70;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        box-shadow: 0.25rem 0.125rem 7px lightgrey;
+        height: 80px;
+        background-color: white;
+    }
+
+        #myMenu ul li {
+            display: inline-block;
+            margin-left: 30px;
+            margin-top: 25px;
+            float: left;
+        }
+
+            #myMenu ul li a {
+                font-family: Roboto;
+                font-size: 2.3em;
+                text-decoration: none;
+                color: slategrey;
+            }
+
+    .search-field {
+        display: inline-block;
+        float: left;
+        margin-left: 30px;
+        margin-top: 9px;
+        font-size: 2em;
+        border-radius: 25px;
+        width: 50%;
+        opacity: 0.75;
+    }
+
+    .register {
+        margin-left: 95%;
+        margin-top: 23px;
+    }
+</style>
+
+<div id="myMenu">
+    <p class="logo-text"><a href="/Home/Index">Tijarat<span class="logo-text-sm">.com</span></a></p>
+    <ul>
+        <li><a href="/Home/Categories">Categories</a></li>
+        <li><a href="/Product/Products">Trending</a></li>
+        <li><a href="/Home/Ads">Ads</a></li>
+    </ul>
+    <input class="form-control search-field" placeholder="Search" />
+    <div class="register">
+        <a href="/registration/register"><i style="color:slategrey ;font-size: 2.3em" class="fas fa-user-circle"></i></a>
+    </div>
+</div>
+
+<div class="row wrap">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 bg-opacity-min">
+        <div class="d-flex flex-row bd-highlight mb-3 shadow p-3 mb-5 bg-light">
+            <div class="p-2 bd-highlight mx-auto heading">
+                <a id="log" onclick="showLogin()" class="account-tab-link current link-text" href="#login">Login</a>
+            </div>
+            <div class="p-2 bd-highlight mx-auto heading"><span class="separator">/</span></div>
+            <div class="p-2 bd-highlight mx-auto heading">
+                <a id="sign" onclick="showSignUp()" class="account-tab-link current link-text" href="#login">Register</a>
+            </div>
+        </div>
+        <div>
+            <form id="loginForm" method="post" action="../../Registration/Login">
+                <div id="login" class="shadow-lg p-3 mb-5 bg-light rounded box-size">
+                    <div class="input-group input-group-lg box-padding">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas fa-envelope"></i></span>
+                        </div>
+                        <input name="email" onblur="ValidateEmail()" type="email" class="form-control input-size" id="Email" aria-describedby="emailHelp" placeholder="Enter email">
+
+                    </div>
+                    <small style="display: none;" id="InvalidEmail" class="form-text text-danger small-padding">* Invalid Email</small>
+                    <div class="input-group input-group-lg box-padding">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input onblur="ValidatePasswordOne()" name="password" type="password" class="form-control input-size" id="Pwd" placeholder="Password">
+
+                    </div>
+                    <small style="display: none;" id="invPwd" class="form-text text-danger small-padding">* Password cannot be empty</small>
+                    <button style="margin: 5px 20px; padding: 5px 10px;font-size: 0.9em;text-transform: uppercase" type="submit" id="submitIt" class="btn btn-primary input-size">Login</button>
+
+                </div>
+            </form>
+            <form method="post" action="../../Registration/SignUp">
+                <div id="signup" class="my_hide shadow-lg p-3 mb-5 bg-light rounded box-size">
+                    <div class="input-group input-group-lg box-padding">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas fa-user-circle"></i></span>
+                        </div>
+                        <input name="Username" onblur="ValidateUserName()" type="text" class="form-control input-size" id="UserName" placeholder="Enter Name" />
+                    </div>
+                    <small style="display: none;" id="InvalidUserName" class="form-text text-danger small-padding">* Username length must be greater than 2 and it should only contain (A-Z , a-z , 0-9 , _)</small>
+
+                    <div class="input-group input-group-lg box-padding">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas fa-map-marker-alt"></i></span>
+                        </div>
+                        <input name="Address" type="text" class="form-control input-size" id="Address" placeholder="Enter Address" />
+                    </div>
+
+                    <div class="input-group input-group-lg box-padding">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas fa-mobile"></i></span>
+                        </div>
+                        <input name="Phone" type="text" class="form-control input-size" id="PhoneNumber" placeholder="Enter Phone #" />
+                    </div>
+
+                    <div class="input-group input-group-lg box-padding">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas fa-calendar-day"></i></span>
+                        </div>
+                        <input name="Date" type="date" onblur="ValidateDate()" class="form-control input-size" id="DOB" placeholder="DD-MM-YYYY" />
+                    </div>
+                    <small style="display: none;" id="InvalidDate" class="form-text text-danger small-padding">* You must be 18 years old</small>
+
+
+
+                    <div class="input-group input-group-lg box-padding">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas fa-envelope"></i></span>
+                        </div>
+                        <input name="Email" onblur="ValidateEmailOne()" type="email" class="form-control input-size" id="EmailOne" aria-describedby="emailHelp" placeholder="Enter email">
+                    </div>
+                    <small style="display: none;" id="InvalidEmailOne" class="form-text text-danger small-padding">* Invalid Email</small>
+                    <div class="input-group input-group-lg box-padding">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input name="Pwd" onblur="ValidatePassword()" type="password" class="form-control input-size" id="Password" placeholder="Password">
+                    </div>
+                    <small style="display: none;" id="InvalidPassword" class="form-text text-danger small-padding">* Password must be 8 characters long</small>
+                    <button  id="registerIt" style="margin: 5px 20px; padding: 5px 10px; font-size: 0.9em; text-transform: uppercase" type="submit" class="btn btn-primary">Sign Up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

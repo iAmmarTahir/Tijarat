@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    int orders = (int)Session["ordersCount"];
+    int ads = (int)Session["adsCount"];
+    int products = (int)Session["productsCount"];
+}
+
+<style>
+    #myMenu ul li a:hover {
+        color: orange;
+        transition: 0.03s all ease-in-out;
+    }
+
+    .register a i:hover {
+        color: orange;
+        transition: 0.03s all ease-in-out;
+    }
+
+
+    .logo-text {
+        font-size: 4em;
+        font-family: 'Ubuntu';
+        font-weight: bold;
+        letter-spacing: 15px;
+        float: left;
+        display: inline-block;
+        margin-top: 5px;
+        margin-left: 30px;
+    }
+
+    .logo-text a {
+        text-decoration: none;
+        color: orange;
+        opacity: 0.8;
+        transition: 0.03s all ease-in-out;
+    }
+
+    .logo-text a:hover{
+        opacity: 1;
+    }
+
+    .logo-text-sm {
+        color: slategrey;
+        font-size: 0.5em;
+        font-weight: lighter;
+        text-transform: uppercase;
+        letter-spacing: normal;
+    }
+
+    #myMenu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 40px;
+        z-index: 70;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        box-shadow: 0.25rem 0.125rem 7px lightgrey;
+        height: 80px;
+        background-color: white;
+    }
+
+        #myMenu ul li {
+            display: inline-block;
+            margin-left: 30px;
+            margin-top: 25px;
+            float: left;
+        }
+
+            #myMenu ul li a {
+                font-family: Roboto;
+                font-size: 2.3em;
+                text-decoration: none;
+                color: slategrey;
+            }
+
+  
+    .wrap {
+        margin-top: 80px;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    .admin-header {
+        font-size: 3em;
+        text-transform: uppercase;
+        color: slategrey;
+        text-align: center;
+    }
+    .numbers {
+        font-size: 5em;
+        color: orange;
+        margin-left: 50%;
+        font-weight: bolder;
+    }
+    .border {
+        border: 1px solid black;
+    }
+</style>
+
+    <div id="myMenu">
+        <p class="logo-text"><a href="/Home/Index">Tijarat<span class="logo-text-sm">.com</span></a></p>
+        <ul>
+            <li><a href="/Admin/Orders">Orders</a></li>
+            <li><a href="/Admin/Ads">Ads</a></li>
+            <li><a href="/Admin/Products">Products</a></li>
+            <li><a href="/Admin/Categories">Category</a></li>
+        </ul>
+        
+       @if(Session["admin"] != null)
+       {
+           <form  action="../../Admin/Logout" method="post">
+               <button type="submit" class="btn btn-primary">Logout</button>
+           </form>
+       }
+    </div>
+
+    <div class="row wrap">
+        <div class="col-md-4 border">
+            <p class="admin-header">Orders Pending</p>
+            <p class="numbers">@orders</p>
+        </div>
+        <div class="col-md-4 border">
+            <p class="admin-header">Ads Posted</p>
+            <p class="numbers">@ads</p>
+        </div>
+        <div class="col-md-4  border">
+            <p class="admin-header">Products Present</p>
+            <p class="numbers">@products</p>
+        </div>
+    </div>
+

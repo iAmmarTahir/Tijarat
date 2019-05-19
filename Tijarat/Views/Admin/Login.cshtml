@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+    <script src="~/Scripts/pol.js">
+
+    </script>
+
+<style>
+    .admin-banner {
+        color: orange;
+        font-size: 2em;
+        text-transform: uppercase;
+        padding-top: 5%;
+    }
+</style>
+
+
+    <div class="row">
+        <div class="col-md-4"></div>
+
+        <div class="col-md-4">
+            <div class="d-flex flex-row bd-highlight mb-3 shadow p-3 mb-5 bg-light">
+                <div class="p-2 bd-highlight mx-auto heading">
+                   <p class="admin-banner">Admin Login</p>
+                </div>
+            </div>
+            <form id="loginForm" method="post" action="../../Admin/loginIt">
+                <div id="login" class="shadow-lg p-3 mb-5 bg-light rounded box-size">
+                    <div class="input-group input-group-lg box-padding">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas fa-envelope"></i></span>
+                        </div>
+                        <input name="email" onblur="ValidateEmail()" type="email" class="form-control input-size" id="Email" aria-describedby="emailHelp" placeholder="Enter email">
+
+                    </div>
+                    <small style="display: none;" id="InvalidEmail" class="form-text text-danger small-padding">* Invalid Email</small>
+                    <div class="input-group input-group-lg box-padding">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input onblur="ValidatePasswordOne()" name="password" type="password" class="form-control input-size" id="Pwd" placeholder="Password">
+
+                    </div>
+                    <small style="display: none;" id="invPwd" class="form-text text-danger small-padding">* Password cannot be empty</small>
+                    <button style="margin: 5px 20px; padding: 5px 10px;font-size: 0.9em;text-transform: uppercase" type="submit" id="submitIt" class="btn btn-primary input-size">Login</button>
+
+                </div>
+            </form>
+        </div>
+    </div>

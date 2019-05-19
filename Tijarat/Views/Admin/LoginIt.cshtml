@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "LoginIt";
+}
+
+
+@{
+    int userID = (int)Session["admin"];
+}
+
+@if (userID != 0)
+{
+    Response.Redirect("~/Admin/Index");
+}
+else
+{
+    <h2>Incorrect info</h2>
+    Response.Redirect("~/Admin/Login");
+}
+

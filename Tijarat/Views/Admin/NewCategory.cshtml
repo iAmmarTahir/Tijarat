@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "NewCategory";
+}
+
+
+<style>
+    #myMenu ul li a:hover {
+        color: orange;
+        transition: 0.03s all ease-in-out;
+    }
+
+    .register a i:hover {
+        color: orange;
+        transition: 0.03s all ease-in-out;
+    }
+
+
+    .logo-text {
+        font-size: 4em;
+        font-family: 'Ubuntu';
+        font-weight: bold;
+        letter-spacing: 15px;
+        float: left;
+        display: inline-block;
+        margin-top: 5px;
+        margin-left: 30px;
+    }
+
+        .logo-text a {
+            text-decoration: none;
+            color: orange;
+            opacity: 0.8;
+            transition: 0.03s all ease-in-out;
+        }
+
+            .logo-text a:hover {
+                opacity: 1;
+            }
+
+    .logo-text-sm {
+        color: slategrey;
+        font-size: 0.5em;
+        font-weight: lighter;
+        text-transform: uppercase;
+        letter-spacing: normal;
+    }
+
+    #myMenu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 40px;
+        z-index: 70;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        box-shadow: 0.25rem 0.125rem 7px lightgrey;
+        height: 80px;
+        background-color: white;
+    }
+
+        #myMenu ul li {
+            display: inline-block;
+            margin-left: 30px;
+            margin-top: 25px;
+            float: left;
+        }
+
+            #myMenu ul li a {
+                font-family: Roboto;
+                font-size: 2.3em;
+                text-decoration: none;
+                color: slategrey;
+            }
+
+    .order-main {
+        margin-top: 80px;
+    }
+
+    .img-sm {
+        height: 100px;
+        width: 120px;
+    }
+
+    .sm-margin {
+        margin-top: 40px;
+    }
+
+    .mk-bold {
+        font-weight: bolder;
+        font-size: 2em;
+    }
+</style>
+<div id="myMenu">
+    <p class="logo-text"><a href="/Home/Index">Tijarat<span class="logo-text-sm">.com</span></a></p>
+    <ul>
+        <li><a href="/Admin/Index">Dashboard</a></li>
+        <li><a href="/Admin/Orders">Orders</a></li>
+        <li><a href="/Admin/Ads" s>Ads</a></li>
+        <li><a href="/Admin/Products">Products</a></li>
+        <li><a href="/Admin/Categories">Category</a></li>
+    </ul>
+</div>
+
+<div class="order-main">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form action="../../Admin/SaveCategory" method="post">
+                <div class="form-group">
+                    <label>Category ID</label>
+                    <input name="catID" type="number" class="form-control" placeholder="Enter Category ID">
+                </div>
+                
+                <div class="form-group">
+                    <label>Category Name</label>
+                    <input name="catName" type="text" class="form-control" placeholder="Enter Category Name">
+                </div>
+                
+
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+    </div>
+</div>

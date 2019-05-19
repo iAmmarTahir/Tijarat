@@ -1,0 +1,239 @@
+﻿@{
+    ViewBag.Title = "Products";
+}
+
+@model System.Data.SqlClient.SqlDataReader
+    @{ 
+        System.Data.SqlClient.SqlDataReader Product = Model;
+    }
+
+<style>
+    .section {
+        text-align: center;
+        font-size: 3em;
+    }
+
+    #myMenu ul li a:hover {
+        color: orange;
+        transition: 0.03s all ease-in-out;
+    }
+
+    .register a i:hover {
+        color: orange;
+        transition: 0.03s all ease-in-out;
+    }
+
+
+    .logo-text {
+        font-size: 4em;
+        font-family: 'Ubuntu';
+        font-weight: bold;
+        letter-spacing: 15px;
+        float: left;
+        display: inline-block;
+        margin-top: 5px;
+        margin-left: 30px;
+    }
+
+    .logo-text a {
+        text-decoration: none;
+        color: orange;
+        opacity: 0.8;
+        transition: 0.03s all ease-in-out;
+    }
+
+    .logo-text a:hover{
+        opacity: 1;
+    }
+
+    .logo-text-sm {
+        color: slategrey;
+        font-size: 0.5em;
+        font-weight: lighter;
+        text-transform: uppercase;
+        letter-spacing: normal;
+    }
+
+    #myMenu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 40px;
+        z-index: 70;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        box-shadow: 0.25rem 0.125rem 7px lightgrey;
+        height: 80px;
+        background-color: white;
+    }
+
+        #myMenu ul li {
+            display: inline-block;
+            margin-left: 30px;
+            margin-top: 25px;
+            float: left;
+        }
+
+            #myMenu ul li a {
+                font-family: Roboto;
+                font-size: 2.3em;
+                text-decoration: none;
+                color: slategrey;
+            }
+
+    .search-field {
+        display: inline-block;
+        float: left;
+        margin-left: 30px;
+        margin-top: 9px;
+        font-size: 2em;
+        border-radius: 25px;
+        width: 50%;
+        opacity: 0.75;
+    }
+
+    .register {
+        margin-left: 75%;
+        margin-top: 23px;
+    }
+
+    .prod-img {
+        margin-top: 20px;
+        height: 500px;
+        width: 480px;
+        margin-bottom: 100px;
+        box-shadow: 0.25rem 0.125rem 10px grey;
+        
+    }
+
+    .prod-desc {
+        text-align: justify;
+        font-size: 0.55em;
+        margin-right: 45px;
+        
+    }
+
+    .prod-name {
+        font-size: 1em;
+        text-align: left;
+        margin-top: 40px;
+        font-weight: bold;
+        color: orange;
+    }
+
+    .prod-category , .prod-qty {
+        font-size: 0.7em;
+        text-align: left;
+    }
+
+    .icon {
+        text-align: left;
+        color: grey;
+        font-size: 1.3em;
+        margin-top: 40px;
+        margin-left: 15px;
+        height: 48px;
+        width: 39px;
+    }
+
+    .cart {
+        display: inline-block;
+        float: left;
+        margin-left: 100px;
+        font-size: 2.3em;
+        margin-top: 8px;
+        color: slategrey;
+    }
+
+    .icon:hover {
+        color: orange;
+    }
+    .prod-wrap {
+        font-family: Roboto,monospace;
+        color: slategrey;
+    }
+
+    .qty-inp {
+        width: 80px;
+        margin: 20px 0 0 20px; 
+    }
+</style>
+
+
+
+<div id="myMenu">
+    <p class="logo-text"><a href="/Home/Index">Tijarat<span class="logo-text-sm">.com</span></a></p>
+    <ul>
+        <li><a href="/Home/Categories">Categories</a></li>
+        <li><a href="/Product/Products">Trending</a></li>
+        <li><a href="/Home/Ads">Ads</a></li>
+    </ul>
+    <form action="../../Home/Search" method="get">
+        <input name="product" class="form-control search-field" placeholder="Search" />
+        <button type="submit" style="float: left; display: inline-block; font-size: 1.5em; margin-left: 5px; margin-right: 10px; margin-top: 10px" class="btn btn-outline-warning">Search</button>
+    </form>
+    @if (Session["Cart"] != null)
+    {
+        <div class="cart">
+            <a href="/Product/ShoppingCart"><i class="fas fa-shopping-cart"></i></a>
+        </div>
+    }
+    <div class="register">
+        <h5 style="float: left; margin-top: 5px ;margin-left: 15px; font-size: 1.5em">@Session["username"]</h5>
+        @if (Session["access"] != null)
+        {
+            <form action="../../Registration/Logout" method="post">
+                <button style="float: left; margin-left: 15px; font-size: 1.5em" type="submit" class="btn btn-primary">Log out</button>
+            </form>
+        }
+        else
+        {
+            <a href="/registration/register"><i style="color:slategrey ;font-size: 2.3em" class="fas fa-user-circle"></i></a>
+        }
+    </div>
+</div>
+<div id="fullpage">
+    @while (Product.Read())
+    {
+        <div style="margin-top: 80px" class="section prod-wrap">
+            <div class="row">
+                <div class="col-md-6">
+                    <img class="prod-img" src="@Product[2]" alt="accessory-briefcase-buckle-1152077" />
+                </div>
+                <div class="col-md-6">
+                    <h2 class="prod-name">
+                        @Product[1]
+                    </h2>
+                    <p class="prod-desc">
+                        @Product[3]
+                    </p>
+                    <h4 class="prod-category">
+                        <span style="font-weight: bold">Category:</span> @Product[8]
+                    </h4>
+                    <form action="../../product/shoppingcart" method="post">
+                        <input style="display: none;" name="id" value="@Product[0]"/>
+                        <h4 class="prod-qty">
+                            <span style="font-weight: bold">Qty: <input class="qty-inp" type="number" name="qty"></span>
+                        </h4>
+                        <button style="font-size: 1.4em; padding: 20px; margin-left: 75%;" class="btn btn-outline-warning" type="submit">+</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        
+    }
+</div>
+
+<script>
+
+    new fullpage('#fullpage', {
+        sectionsColor: [],
+        menu: '#myMenu'
+    });
+
+
+</script>
+
+

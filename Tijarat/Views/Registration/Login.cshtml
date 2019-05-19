@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+@{ 
+    int userID = (int)Session["access"];
+}
+
+@if (userID != 0)
+{
+    Response.Redirect("~/Home/Index");
+}
+else
+{
+    <h2>Incorrect info</h2>
+    Response.Redirect("~/Registration/Register"); 
+}

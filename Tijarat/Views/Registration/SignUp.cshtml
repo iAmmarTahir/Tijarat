@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "SignUp";
+}
+
+@{
+    int userID = (int)Session["access"];
+}
+
+@if (userID > 1)
+{
+    Response.Redirect("~/Home/Index");
+}
+else
+{
+    <h2>User already exists.</h2>
+}
+

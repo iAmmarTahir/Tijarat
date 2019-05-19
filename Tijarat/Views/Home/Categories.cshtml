@@ -1,0 +1,192 @@
+﻿
+@{
+    ViewBag.Title = "Categories";
+}
+
+
+
+@model System.Data.SqlClient.SqlDataReader
+@{
+
+    System.Data.SqlClient.SqlDataReader Category = Model;
+}
+
+<style>
+    .section {
+        text-align: center;
+        font-size: 3em;
+        margin-top: 70px;
+    }
+
+    #myMenu ul li a:hover {
+        color: orange;
+        transition: 0.03s all ease-in-out;
+    }
+
+    .register a i:hover {
+        color: orange;
+        transition: 0.03s all ease-in-out;
+    }
+
+
+    .logo-text {
+        font-size: 4em;
+        color: orange;
+        font-family: 'Ubuntu';
+        font-weight: bold;
+        letter-spacing: 15px;
+        float: left;
+        display: inline-block;
+        margin-top: 5px;
+        margin-left: 30px;
+    }
+
+        .logo-text a {
+            text-decoration: none;
+            color: orange;
+            opacity: 0.8;
+            transition: 0.03s all ease-in-out;
+        }
+
+            .logo-text a:hover {
+                opacity: 1;
+            }
+
+    .logo-text-sm {
+        color: slategrey;
+        font-size: 0.5em;
+        font-weight: lighter;
+        text-transform: uppercase;
+        letter-spacing: normal;
+    }
+
+    #myMenu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 40px;
+        z-index: 70;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        box-shadow: 0.25rem 0.125rem 7px lightgrey;
+        height: 80px;
+        background-color: white;
+    }
+
+        #myMenu ul li {
+            display: inline-block;
+            margin-left: 30px;
+            margin-top: 25px;
+            float: left;
+            text-transform: uppercase;
+        }
+
+            #myMenu ul li a {
+                font-family: Roboto;
+                font-size: 2.3em;
+                text-decoration: none;
+                color: slategrey;
+            }
+
+    .search-field {
+        display: inline-block;
+        float: left;
+        margin-left: 30px;
+        margin-top: 9px;
+        font-size: 2em;
+        border-radius: 25px;
+        width: 50%;
+        opacity: 0.75;
+    }
+
+    .register {
+        margin-left: 75%;
+        margin-top: 23px;
+    }
+
+    .cart {
+        display: inline-block;
+        float: left;
+        margin-left: 100px;
+        font-size: 2.3em;
+        margin-top: 8px;
+        color: slategrey;
+    }
+
+    .fp-controlArrow {
+        opacity: 0.1;
+    }
+
+    .order-main {
+        margin-top: 80px;
+    }
+
+    .img-sm {
+        height: 100px;
+        width: 120px;
+    }
+
+    .sm-margin {
+        margin-top: 40px;
+    }
+
+    .mk-bold {
+        font-weight: bolder;
+        font-size: 2em;
+    }
+    .cat {
+        font-size: 2em;
+        color: orange;
+        margin-left: 10px;
+    }
+    .order-main a {
+        text-decoration: none;
+    }
+</style>
+<div id="myMenu">
+    <p class="logo-text"><a href="/Home/Index">Tijarat<span class="logo-text-sm">.com</span></a></p>
+    <ul>
+        <li><a href="/Home/Categories">Categories</a></li>
+        <li><a href="/Product/Products">Trending</a></li>
+        <li><a href="/Home/Ads">Ads</a></li>
+    </ul>
+    <form action="../../Home/Search" method="get">
+        <input name="product" class="form-control search-field" placeholder="Search" />
+        <button type="submit" style="float: left; display: inline-block; font-size: 1.5em; margin-left: 5px; margin-right: 10px; margin-top: 10px" class="btn btn-outline-warning">Search</button>
+    </form>
+    @if (Session["Cart"] != null)
+    {
+        <div class="cart">
+            <a href="/Product/ShoppingCart"><i class="fas fa-shopping-cart"></i></a>
+        </div>
+    }
+    <div class="register">
+        <h5 style="float: left; margin-top: 5px ;margin-left: 15px; font-size: 1.5em">@Session["username"]</h5>
+        @if (Session["access"] != null)
+        {
+            <form action="../../Registration/Logout" method="post">
+                <button style="float: left; margin-left: 15px; font-size: 1.5em" type="submit" class="btn btn-primary">Log out</button>
+            </form>
+        }
+        else
+        {
+            <a href="/registration/register"><i style="color:slategrey ;font-size: 2.3em" class="fas fa-user-circle"></i></a>
+        }
+    </div>
+</div>
+
+<div class="order-main">
+    @while (Category.Read())
+    {
+        <div class="row">
+            <div class="col-md-6">
+                <a href="../../Home/Display?Category=@Category[1]"><h1 class="cat">@Category[1]</h1></a>
+                <hr />
+            </div>
+        </div>
+    }
+</div>
+
+
+
